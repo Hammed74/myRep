@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import './App.css'
+import "./stylesheets/Landing.css";
 
 function App() {
 
   return (
     <>
-      <h1>Welcome to myRep.</h1>
+      <h1 className="landing-header">Welcome to myRep.</h1>
       <div className="box">
         <h2 className='sign-in'>Sign In</h2>
         <div className='log-box'>
@@ -16,6 +15,7 @@ function App() {
           <div className='login-label'>Password</div>
           <input className="login-box password" type="password"/>
         </div> 
+        <div className='forgot'>Forgot Password?</div>
         <button className='submit'>Continue</button>
       </div>
     </>

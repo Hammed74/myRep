@@ -4,12 +4,16 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  background: url(/Users/med/repos/myRep/myRep/src/assets/bg-gradient.png);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  margin: 0 auto;
+  text-align: center;
 }
 
 *{
@@ -22,6 +26,9 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: url(/Users/med/repos/myRep/myRep/src/assets/bg-gradient.png);
+  background-size: contain;
+  background-repeat: repeat;
 }
 
 h1 {
@@ -29,7 +36,7 @@ h1 {
   padding-bottom: 3rem;
   font-size: 5em;
   line-height: 1.1;
-  animation: fadeIn 1.5s ease-in 1;
+  animation: fadeIn 2s ease-in 1;
 }
 
 .box{
@@ -54,6 +61,7 @@ box-shadow: 0px 10px 13px 1px rgb(54, 54, 54);
   color: black;
   font-size: 1.2rem;
   font-family: sans-serif;
+  padding-left: 0.5rem;
 }
 
 .log-box{
@@ -61,7 +69,11 @@ box-shadow: 0px 10px 13px 1px rgb(54, 54, 54);
   display: flex;
   flex-direction: column;
   text-align: left;
-  margin-bottom: 1.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.username{
+  margin-bottom: 0.5rem;
 }
 
 .login-label{
@@ -72,7 +84,8 @@ box-shadow: 0px 10px 13px 1px rgb(54, 54, 54);
 
 .sign-in{
   font-size: 2.8rem;
-  color: black;
+  color: rgb(23, 23, 23);
+margin-top: 1.2rem;
 
 }
 
@@ -86,6 +99,22 @@ box-shadow: 0px 10px 13px 1px rgb(54, 54, 54);
   font-weight: 700;
 }
 
+.submit:hover{
+  background-color: rgb(89, 0, 213);
+  cursor: pointer;
+}
+.forgot{
+  color: rgb(85, 0, 204);
+  text-align: left;
+  margin-left: 1rem;
+  font-weight: 800;
+  width: fit-content;
+}
+
+.forgot:hover{
+  color: black;
+  cursor: pointer;
+}
 @keyframes fadeIn {
   0%{
     opacity: 0;
