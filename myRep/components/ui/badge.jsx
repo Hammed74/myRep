@@ -15,10 +15,10 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
-        diamond: "bg-blue-300 text-foreground ",
-        platinum: "bg-gray-200",
-        gold: "bg-amber-400",
-        silver: "bg-zinc-400"
+        Diamond: "bg-blue-300 text-foreground ",
+        Platinum: "bg-gray-200",
+        Gold: "bg-amber-400",
+        Silver: "bg-zinc-400"
       },
     },
     defaultVariants: {
