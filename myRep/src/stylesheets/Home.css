@@ -12,13 +12,11 @@ a{
 
 .body-home{
    display: flex;
-    height: 100vh;
     background-color: rgb(234, 232, 241);
     align-items: center;
 }
 
 .sidebar{
-    background-color: #FFFAFA;
     width: 20%;
     height: 96vh;
     border-radius:0 2rem 2rem 0;
@@ -27,7 +25,6 @@ a{
 .home-main{
     background-color: rgb(234, 232, 241);
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,7 +47,7 @@ a{
     margin-top: 3.5rem;
 }
 
-.navbar > div{
+.navbar div{
     text-align: left;
     padding-left: 3rem;
     font-size: 1.3rem;
@@ -62,7 +59,7 @@ a{
     cursor: pointer;
 }
 
-.navbar > div:hover{
+.navbar div:hover{
     background-color: rgb(234, 232, 241);
 }
 
@@ -95,8 +92,10 @@ a{
     display: flex;
     justify-content: space-between;
     width: 93%;
-    padding: 4rem 0;
+    margin: 2rem 0;
+    padding: 2rem 0;
     align-items: center;
+     background-color: rgb(234, 232, 241);
 }
 
 .first-section-main-bar{
@@ -156,7 +155,7 @@ a{
     display: flex;
     place-items: center;
     padding: 0.5rem;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .create{
@@ -210,4 +209,3 @@ a{
     color: rgb(113, 61, 185);
     text-decoration: underline;
 }
-
