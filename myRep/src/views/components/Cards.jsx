@@ -4,6 +4,7 @@ import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
 import { Progress } from "../../../components/ui/progress";
 import {v4 as uuidv4} from 'uuid'
+import { useRef } from "react";
 import {
   Card,
   CardContent,
@@ -28,13 +29,32 @@ import {
   TableRow,
 } from "../../../components/ui/table";
 
+import { compareDesc } from "date-fns";
+
+
 import Person from "../../assets/person.png";
 
-export default function Cards({date, time}) {
+export default function Cards({date, time, newLead, leadArray, setLeadArray}) {
 
-  const [leadArray, setLeadArray] = useState([]);
+
+
 
  useEffect(() => {
+
+  const currentDate1 = new Date();
+  currentDate1.setDate(currentDate1.getDate() - 1);
+
+  const currentDate2 = new Date();
+  currentDate2.setDate(currentDate2.getDate() - 12);
+
+  const currentDate3 = new Date();
+  currentDate3.setDate(currentDate3.getDate() - 7);
+
+  const currentDate4 = new Date();
+  currentDate4.setDate(currentDate4.getDate() - 3);
+
+    const currentDate5 = new Date();
+    currentDate5.setDate(currentDate5.getDate() - 462);
 
   const person1 = new Lead(
     "Hammed Sylla",
@@ -42,16 +62,16 @@ export default function Cards({date, time}) {
     "215-713-5942",
     83,
     "Mobile",
-    "Wed Jun 19 2024 00:00:00 GMT-0400",
+    currentDate1,
     "Notes"
   );
   const person2 = new Lead(
     "Martha Stewart",
     "Gold",
-    "71-0938-8927",
+    "610-383-3930",
     63,
     "TV",
-    "Today",
+    currentDate2,
     "Notes"
   );
   const person3 = new Lead(
@@ -60,7 +80,7 @@ export default function Cards({date, time}) {
     "301-653-8902",
     13,
     "Internet & TV",
-    "Today",
+    currentDate3,
     "Notes"
   );
   const person4 = new Lead(
@@ -69,20 +89,36 @@ export default function Cards({date, time}) {
     "717-892-9208",
     33,
     "Home Security",
-    "Today",
+    currentDate4,
     "Notes"
   );
-   setLeadArray([person1,person2,person3,person4]);
+
+   const person5 = new Lead(
+     "Willie Nelson",
+     "Diamond",
+     "358-739-0026",
+     8,
+     "Home Security",
+     currentDate5,
+     "Notes"
+   );
+
+  const leadArr = [person1, person2, person3, person4, person5];
+
+   const sortedLeadArr = [...leadArr].sort((a, b) =>
+      compareDesc(a.date, b.date)
+    );
+    setLeadArray(sortedLeadArr);
 
  }, []);
+
+
 
 
   function addToLeadArray(person){
     const updatedArray = [...leadArray, person]
     setLeadArray(updatedArray)
   }
-
-
 
 
   return (
@@ -111,7 +147,7 @@ export default function Cards({date, time}) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {leadArray.map((lead) => {
+            {leadArray && leadArray.map((lead) => {
               return (
                 <LeadCard
                   key={uuidv4()}

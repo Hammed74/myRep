@@ -5,7 +5,6 @@ import InfoIcon from "../../assets/info.png";
 import Pitches from "../../assets/pitches.png";
 import Settings from "../../assets/settings.png";
 import Closed from "../../assets/closed.png";
-import { DatePicker } from './DatePicker'
 
 
 export function Sidebar({name}) {
@@ -79,8 +78,6 @@ export function Sidebar({name}) {
       <Link to={"/"}>
         <div className="logout">LOG OUT</div>
       </Link>
-
-      <DatePicker />
     </div>
   );
 }

@@ -101,7 +101,7 @@ a{
 .first-section-main-bar{
     display: flex;
     gap: 1rem;
-    align-items:baseline;
+   align-items: center;
 }
 
 .past-week-container{
