@@ -45,9 +45,8 @@ import {
 import { Calendar } from "../../../components/ui/calendar";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
-import * as Slider from "../../../node_modules/@radix-ui/react-slider";
 
-import * as SliderPrimitive from "@radix-ui/react-slider";
+
 
 export function DrawerDialogDemo({ newLead, setNewLead, leadArray, setLeadArray }) {
   const [open, setOpen] = React.useState(false);
@@ -61,12 +60,10 @@ export function DrawerDialogDemo({ newLead, setNewLead, leadArray, setLeadArray 
     const [leadNumber, setLeadNumber] = React.useState();
 
     const [followUp, setFollowUp] = React.useState();
-
-    const [interestLevel, setInterestLevel] = React.useState(50);
  
   function handleSetNewLead(leadName, leadCategory, leadRewards, leadNumber, followUp) {
     const currentDate = new Date()
-    const lead = new Lead(leadName, leadRewards, leadNumber, 70, leadCategory, currentDate, followUp, interestLevel, "");
+    const lead = new Lead(leadName, leadRewards, leadNumber, 70, leadCategory, currentDate, followUp, "");
     setNewLead(lead);
     setLeadArray([lead, ...leadArray])
     setOpen(false)
@@ -94,8 +91,6 @@ export function DrawerDialogDemo({ newLead, setNewLead, leadArray, setLeadArray 
           setLeadNumber={setLeadNumber}
           followUp={followUp}
           setFollowUp={setFollowUp}
-          interestLevel={interestLevel}
-          setInterestLevel={setInterestLevel}
         />
       </DialogContent>
     </Dialog>
@@ -115,9 +110,6 @@ function ProfileForm({
   setLeadNumber,
   followUp,
   setFollowUp,
-  interestLevel,
-  setInterestLevel,
-  ...props
 }) {
   function handleLeadName(event) {
     setLeadName(event.target.value);
@@ -126,10 +118,6 @@ function ProfileForm({
     const handleLeadRewards = (value) => {
       setLeadRewards(value);
     };
-
-
-
-
 
  
   return (
@@ -233,23 +221,8 @@ function ProfileForm({
           </PopoverContent>
         </Popover>
       </div>
-      <div className="grid gap-3">
-        <Label htmlFor="Date of Follow Up">Interest Level</Label>
-      </div>
+   
 
-      <Slider.Root
-        className="SliderRoot"
-        defaultValue={[50]}
-        max={100}
-        step={1}
-      >
-        <Slider.Track className="SliderTrack">
-          <Slider.Range className="SliderRange" />
-        </Slider.Track>
-        <Slider.Thumb className="SliderThumb" aria-label="Volume" />
-      </Slider.Root>
-
-      <div>{interestLevel}</div>
       <Button
         className="bg-violet-600"
         onClick={() =>
@@ -267,4 +240,3 @@ function ProfileForm({
     </div>
   );
 }
-

@@ -34,7 +34,9 @@ import { compareDesc } from "date-fns";
 
 import Person from "../../assets/person.png";
 
-export default function Cards({date, time, newLead, leadArray, setLeadArray}) {
+export default function Cards({date, time, newLead, leadArray, setLeadArray, search}) {
+
+
 
 
   return (
@@ -64,16 +66,22 @@ export default function Cards({date, time, newLead, leadArray, setLeadArray}) {
           </TableHeader>
           <TableBody>
             {leadArray && leadArray.map((lead) => {
-              return (
-                <LeadCard
-                  key={uuidv4()}
-                  name={lead.name}
-                  rewards={lead.rewards}
-                  phone={lead.phone}
-                  temp={lead.temp}
-                  category={lead.category}
-                />
+
+              if (
+                lead.name.toLowerCase().includes(search.toLowerCase()) ||
+                lead.rewards.toLowerCase().includes(search.toLowerCase()) ||
+                lead.category.toLowerCase().includes(search.toLowerCase())
               )
+                return (
+                  <LeadCard
+                    key={uuidv4()}
+                    name={lead.name}
+                    rewards={lead.rewards}
+                    phone={lead.phone}
+                    temp={lead.temp}
+                    category={lead.category}
+                  />
+                );
             })}
           </TableBody>
         </Table>
