@@ -32,7 +32,7 @@ import {
 
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
-import { Lead } from "./Cards";
+import { Lead } from "../Home";
 import { RadioGroup, RadioGroupItem } from "../../../components/ui/radio-group";
 
 
@@ -45,6 +45,9 @@ import {
 import { Calendar } from "../../../components/ui/calendar";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
+import * as Slider from "../../../node_modules/@radix-ui/react-slider";
+
+import * as SliderPrimitive from "@radix-ui/react-slider";
 
 export function DrawerDialogDemo({ newLead, setNewLead, leadArray, setLeadArray }) {
   const [open, setOpen] = React.useState(false);
@@ -57,13 +60,15 @@ export function DrawerDialogDemo({ newLead, setNewLead, leadArray, setLeadArray 
 
     const [leadNumber, setLeadNumber] = React.useState();
 
-    const [leadDate, setLeadDate] = React.useState();
+    const [followUp, setFollowUp] = React.useState();
+
+    const [interestLevel, setInterestLevel] = React.useState(50);
  
-  function handleSetNewLead(leadName, leadCategory, leadRewards, leadNumber, leadDate) {
-    console.log("it ran")
-    const lead = new Lead(leadName, leadRewards, leadNumber, "", leadCategory, leadDate, "");
+  function handleSetNewLead(leadName, leadCategory, leadRewards, leadNumber, followUp) {
+    const currentDate = new Date()
+    const lead = new Lead(leadName, leadRewards, leadNumber, 70, leadCategory, currentDate, followUp, interestLevel, "");
     setNewLead(lead);
-    setLeadArray([...leadArray,lead])
+    setLeadArray([lead, ...leadArray])
     setOpen(false)
   }
 
@@ -87,8 +92,10 @@ export function DrawerDialogDemo({ newLead, setNewLead, leadArray, setLeadArray 
           setLeadRewards={setLeadRewards}
           leadNumber={leadNumber}
           setLeadNumber={setLeadNumber}
-          leadDate={leadDate}
-          setLeadDate={setLeadDate}
+          followUp={followUp}
+          setFollowUp={setFollowUp}
+          interestLevel={interestLevel}
+          setInterestLevel={setInterestLevel}
         />
       </DialogContent>
     </Dialog>
@@ -106,8 +113,11 @@ function ProfileForm({
   setLeadRewards,
   leadNumber,
   setLeadNumber,
-  leadDate,
-  setLeadDate
+  followUp,
+  setFollowUp,
+  interestLevel,
+  setInterestLevel,
+  ...props
 }) {
   function handleLeadName(event) {
     setLeadName(event.target.value);
@@ -116,6 +126,7 @@ function ProfileForm({
     const handleLeadRewards = (value) => {
       setLeadRewards(value);
     };
+
 
 
 
@@ -205,27 +216,50 @@ function ProfileForm({
               variant={"outline"}
               className={cn(
                 "w-[280px] justify-start text-left font-normal",
-                !leadDate && "text-muted-foreground"
+                !followUp && "text-muted-foreground"
               )}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {leadDate ? format(leadDate, "PPP") : <span>Pick a date</span>}
+              {followUp ? format(followUp, "PPP") : <span>Pick a date</span>}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
             <Calendar
               mode="single"
-              selected={leadDate}
-              onSelect={setLeadDate}
+              selected={followUp}
+              onSelect={setFollowUp}
               initialFocus
             />
           </PopoverContent>
         </Popover>
       </div>
+      <div className="grid gap-3">
+        <Label htmlFor="Date of Follow Up">Interest Level</Label>
+      </div>
+
+      <Slider.Root
+        className="SliderRoot"
+        defaultValue={[50]}
+        max={100}
+        step={1}
+      >
+        <Slider.Track className="SliderTrack">
+          <Slider.Range className="SliderRange" />
+        </Slider.Track>
+        <Slider.Thumb className="SliderThumb" aria-label="Volume" />
+      </Slider.Root>
+
+      <div>{interestLevel}</div>
       <Button
         className="bg-violet-600"
         onClick={() =>
-          handleSetNewLead(leadName, leadCategory, leadRewards, leadNumber, leadDate)
+          handleSetNewLead(
+            leadName,
+            leadCategory,
+            leadRewards,
+            leadNumber,
+            followUp
+          )
         }
       >
         Save changes

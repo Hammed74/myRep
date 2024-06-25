@@ -37,90 +37,6 @@ import Person from "../../assets/person.png";
 export default function Cards({date, time, newLead, leadArray, setLeadArray}) {
 
 
-
-
- useEffect(() => {
-
-  const currentDate1 = new Date();
-  currentDate1.setDate(currentDate1.getDate() - 1);
-
-  const currentDate2 = new Date();
-  currentDate2.setDate(currentDate2.getDate() - 12);
-
-  const currentDate3 = new Date();
-  currentDate3.setDate(currentDate3.getDate() - 7);
-
-  const currentDate4 = new Date();
-  currentDate4.setDate(currentDate4.getDate() - 3);
-
-    const currentDate5 = new Date();
-    currentDate5.setDate(currentDate5.getDate() - 462);
-
-  const person1 = new Lead(
-    "Hammed Sylla",
-    "Diamond",
-    "215-713-5942",
-    83,
-    "Mobile",
-    currentDate1,
-    "Notes"
-  );
-  const person2 = new Lead(
-    "Martha Stewart",
-    "Gold",
-    "610-383-3930",
-    63,
-    "TV",
-    currentDate2,
-    "Notes"
-  );
-  const person3 = new Lead(
-    "John Bryant",
-    "Platinum",
-    "301-653-8902",
-    13,
-    "Internet & TV",
-    currentDate3,
-    "Notes"
-  );
-  const person4 = new Lead(
-    "Tyrone Smalls",
-    "Silver",
-    "717-892-9208",
-    33,
-    "Home Security",
-    currentDate4,
-    "Notes"
-  );
-
-   const person5 = new Lead(
-     "Willie Nelson",
-     "Diamond",
-     "358-739-0026",
-     8,
-     "Home Security",
-     currentDate5,
-     "Notes"
-   );
-
-  const leadArr = [person1, person2, person3, person4, person5];
-
-   const sortedLeadArr = [...leadArr].sort((a, b) =>
-      compareDesc(a.date, b.date)
-    );
-    setLeadArray(sortedLeadArr);
-
- }, []);
-
-
-
-
-  function addToLeadArray(person){
-    const updatedArray = [...leadArray, person]
-    setLeadArray(updatedArray)
-  }
-
-
   return (
     <Card>
       <CardHeader>
@@ -166,15 +82,7 @@ export default function Cards({date, time, newLead, leadArray, setLeadArray}) {
   );
 }
 
-export function Lead(name, rewards, phone, temp, category, date, notes){
-this.name = name;
-this.rewards = rewards;
-this.phone = phone;
-this.temp = temp;
-this.category = category;
-this.date = date;
-this.notes = notes;
-}
+
 
 
 
