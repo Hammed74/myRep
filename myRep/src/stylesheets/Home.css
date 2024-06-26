@@ -184,6 +184,9 @@ a{
     color: rgb(113, 61, 185);
 }
 
+.search:focus{
+    outline: none;
+}
 .sort-icon{
     width: 20px;
     cursor: pointer;

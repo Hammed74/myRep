@@ -70,7 +70,8 @@ export default function Cards({date, time, newLead, leadArray, setLeadArray, sea
               if (
                 lead.name.toLowerCase().includes(search.toLowerCase()) ||
                 lead.rewards.toLowerCase().includes(search.toLowerCase()) ||
-                lead.category.toLowerCase().includes(search.toLowerCase())
+                lead.category.toLowerCase().includes(search.toLowerCase()) ||
+                lead.phone.includes(search.toLowerCase())
               )
                 return (
                   <LeadCard
@@ -97,6 +98,22 @@ export default function Cards({date, time, newLead, leadArray, setLeadArray, sea
 
 
 function LeadCard({ name, rewards, phone, temp, category, date, notes }) {
+
+  function displayNumber(phone) {
+    const phoneArray = phone.split("");
+    let finalPhone = [];
+
+    for (let i = 0; i < 10; i++) {
+      if (i === 3 || i === 6) {
+        finalPhone.push("-");
+      }
+      finalPhone.push(phoneArray[i]);
+    }
+    const phoneOutput = finalPhone.join("");
+
+    return phoneOutput;
+  }
+
   return (
     <TableRow>
       <TableCell className="hidden sm:table-cell">
@@ -111,7 +128,7 @@ function LeadCard({ name, rewards, phone, temp, category, date, notes }) {
       <TableCell>
         <Badge variant={rewards}>{rewards}</Badge>
       </TableCell>
-      <TableCell className="hidden md:table-cell">{phone}</TableCell>
+      <TableCell className="hidden md:table-cell">{displayNumber(phone)}</TableCell>
       <TableCell className="hidden md:table-cell">
         <Progress value={temp} />
       </TableCell>

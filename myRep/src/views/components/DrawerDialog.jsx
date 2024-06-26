@@ -32,9 +32,8 @@ import {
 
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
-import { Lead } from "../Home";
+import { Lead } from "../Leads";
 import { RadioGroup, RadioGroupItem } from "../../../components/ui/radio-group";
-
 
 import {
   Popover,
@@ -45,10 +44,14 @@ import {
 import { Calendar } from "../../../components/ui/calendar";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
+import { Slider } from "../../../components/ui/slider";
 
-
-
-export function DrawerDialogDemo({ newLead, setNewLead, leadArray, setLeadArray }) {
+export function DrawerDialogDemo({
+  newLead,
+  setNewLead,
+  leadArray,
+  setLeadArray,
+}) {
   const [open, setOpen] = React.useState(false);
 
   const [leadName, setLeadName] = React.useState();
@@ -57,16 +60,35 @@ export function DrawerDialogDemo({ newLead, setNewLead, leadArray, setLeadArray 
 
   const [leadRewards, setLeadRewards] = React.useState();
 
-    const [leadNumber, setLeadNumber] = React.useState();
+  const [leadNumber, setLeadNumber] = React.useState();
 
-    const [followUp, setFollowUp] = React.useState();
- 
-  function handleSetNewLead(leadName, leadCategory, leadRewards, leadNumber, followUp) {
-    const currentDate = new Date()
-    const lead = new Lead(leadName, leadRewards, leadNumber, 70, leadCategory, currentDate, followUp, "");
+  const [followUp, setFollowUp] = React.useState();
+
+  const [interestLevel, setInterestLevel] = React.useState([75]);
+
+  function handleSetNewLead(
+    leadName,
+    leadCategory,
+    leadRewards,
+    leadNumber,
+    followUp
+  ) {
+    const currentDate = new Date();
+    const [interest] = interestLevel;
+    const lead = new Lead(
+      leadName,
+      leadRewards,
+      leadNumber,
+      70,
+      leadCategory,
+      currentDate,
+      followUp,
+      interest,
+      ""
+    );
     setNewLead(lead);
-    setLeadArray([lead, ...leadArray])
-    setOpen(false)
+    setLeadArray([lead, ...leadArray]);
+    setOpen(false);
   }
 
   return (
@@ -91,6 +113,8 @@ export function DrawerDialogDemo({ newLead, setNewLead, leadArray, setLeadArray 
           setLeadNumber={setLeadNumber}
           followUp={followUp}
           setFollowUp={setFollowUp}
+          interestLevel={interestLevel}
+          setInterestLevel={setInterestLevel}
         />
       </DialogContent>
     </Dialog>
@@ -110,16 +134,21 @@ function ProfileForm({
   setLeadNumber,
   followUp,
   setFollowUp,
+  interestLevel,
+  setInterestLevel,
 }) {
   function handleLeadName(event) {
     setLeadName(event.target.value);
   }
 
-    const handleLeadRewards = (value) => {
-      setLeadRewards(value);
-    };
+  const handleLeadRewards = (value) => {
+    setLeadRewards(value);
+  };
 
- 
+  const handleInterestChange = (value) => {
+    setInterestLevel([value]);
+  };
+
   return (
     <div className={cn("grid items-start gap-8", className)}>
       <div className="grid gap-2">
@@ -221,8 +250,18 @@ function ProfileForm({
           </PopoverContent>
         </Popover>
       </div>
-   
 
+      <Slider
+        // defaultValue={[50]}
+        max={100}
+        step={1}
+        className={cn("w-[95%]", className)}
+        value={interestLevel}
+        onValueChange={(newValue) => handleInterestChange(newValue)}
+      />
+      <div className="w-full flex text-center justify-center font-bold text-lg">
+        {interestLevel}
+      </div>
       <Button
         className="bg-violet-600"
         onClick={() =>
@@ -231,7 +270,8 @@ function ProfileForm({
             leadCategory,
             leadRewards,
             leadNumber,
-            followUp
+            followUp,
+            interestLevel
           )
         }
       >
