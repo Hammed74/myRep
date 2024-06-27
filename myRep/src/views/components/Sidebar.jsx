@@ -22,7 +22,7 @@ export function Sidebar({name, dark}) {
       <div className="home-username">{name}</div>
       <nav className={`navbar`}>
         <div
-          className={`${dark ? "hover:bg-zinc-800 text-white" : ""} ${activeSection === "LEADS" ? "active" : ""}`}
+          className={` ${dark ? "hover:bg-zinc-900" : "hover:bg-barHover"} ${activeSection === "LEADS" ? (dark ? "bg-zinc-900" : "bg-barHover") : ""}`}
           onClick={() => handleClick("LEADS")}
         >
           <img
@@ -34,7 +34,7 @@ export function Sidebar({name, dark}) {
           LEADS
         </div>
         <div
-          className={activeSection === "INFO" ? "active" : ""}
+          className={` ${dark ? "hover:bg-zinc-900" : "hover:bg-barHover"} ${activeSection === "INFO" ? (dark ? "bg-zinc-900" : "bg-barHover") : ""}`}
           onClick={() => handleClick("INFO")}
         >
           <img
@@ -46,7 +46,7 @@ export function Sidebar({name, dark}) {
           INFO
         </div>
         <div
-          className={activeSection === "PITCHES" ? "active" : ""}
+          className={` ${dark ? "hover:bg-zinc-900" : "hover:bg-barHover"} ${activeSection === "PITCHES" ? (dark ? "bg-zinc-900" : "bg-barHover") : ""}`}
           onClick={() => handleClick("PITCHES")}
         >
           <img
@@ -58,14 +58,14 @@ export function Sidebar({name, dark}) {
           PITCHES
         </div>
         <div
-          className={activeSection === "CLOSED" ? "active" : ""}
+          className={` ${dark ? "hover:bg-zinc-900" : "hover:bg-barHover"} ${activeSection === "CLOSED" ? (dark ? "bg-zinc-900" : "bg-barHover") : ""}`}
           onClick={() => handleClick("CLOSED")}
         >
           <img src={Closed} alt="" width="42px" className="inline-block mr-8" />
           CLOSED
         </div>
         <div
-          className={activeSection === "SETTINGS" ? "active" : ""}
+          className={` ${dark ? "hover:bg-zinc-900" : "hover:bg-barHover"} ${activeSection === "SETTINGS" ? (dark ? "bg-zinc-900" : "bg-barHover") : ""}`}
           onClick={() => handleClick("SETTINGS")}
         >
           <img

@@ -58,14 +58,6 @@ a{
     cursor: pointer;
 }
 
-.navbar div:hover{
-    background-color: rgb(234, 232, 241);
-}
-
-.active{
-    background-color: rgb(234, 232, 241);
-}
-
 .logout{
     position: absolute;
     text-align: center;
