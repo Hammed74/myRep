@@ -7,7 +7,7 @@ import Settings from "../../assets/settings.png";
 import Closed from "../../assets/closed.png";
 
 
-export function Sidebar({name}) {
+export function Sidebar({name, dark}) {
   const [activeSection, setActiveSection] = useState("LEADS"); // Initial active section
 
   const handleClick = (sectionName) => {
@@ -15,12 +15,14 @@ export function Sidebar({name}) {
   };
 
   return (
-    <div className="sidebar bg-card fixed top-4">
+    <div
+      className={`sidebar bg-card fixed top-4 ${dark ? "bg-zinc-800 text-white" : null}`}
+    >
       <div className="logo">myRep</div>
       <div className="home-username">{name}</div>
-      <nav className="navbar">
+      <nav className={`navbar`}>
         <div
-          className={activeSection === "LEADS" ? "active" : ""}
+          className={`${dark ? "hover:bg-zinc-800 text-white" : ""} ${activeSection === "LEADS" ? "active" : ""}`}
           onClick={() => handleClick("LEADS")}
         >
           <img

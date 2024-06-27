@@ -51,6 +51,7 @@ export function DrawerDialogDemo({
   setNewLead,
   leadArray,
   setLeadArray,
+  dark
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -94,9 +95,13 @@ export function DrawerDialogDemo({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="newLead">New Lead +</Button>
+        <Button variant="newLead" className={dark ? "border-none" : null}>
+          New Lead +
+        </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent
+        className={`sm:max-w-[425px] ${dark ? "bg-zinc-800 text-white border-none" : null}`}
+      >
         <DialogHeader>
           <DialogTitle>Add A New Lead</DialogTitle>
           <DialogDescription>Enter Details Here</DialogDescription>
@@ -115,6 +120,7 @@ export function DrawerDialogDemo({
           setFollowUp={setFollowUp}
           interestLevel={interestLevel}
           setInterestLevel={setInterestLevel}
+          dark={dark}
         />
       </DialogContent>
     </Dialog>
@@ -136,6 +142,7 @@ function ProfileForm({
   setFollowUp,
   interestLevel,
   setInterestLevel,
+  dark
 }) {
   function handleLeadName(event) {
     setLeadName(event.target.value);
@@ -149,8 +156,36 @@ function ProfileForm({
     setInterestLevel([value]);
   };
 
+
+
+  function leadValidation(){
+    if(leadName && leadCategory && leadRewards && leadNumber.length >= 10 && followUp){
+       handleSetNewLead(
+         leadName,
+         leadCategory,
+         leadRewards,
+         leadNumber,
+         followUp,
+         interestLevel
+       );
+       clearState()
+    }else{
+      alert("Please Fill Out ALL fields!")
+    }
+  }
+
+  function clearState(){
+    setLeadName(); 
+    setLeadCategory(); 
+    setLeadRewards(); 
+    setLeadNumber();
+    setFollowUp(); 
+  }
+
   return (
-    <div className={cn("grid items-start gap-8", className)}>
+    <div
+      className={`grid items-start gap-8 ${dark ? "bg-zinc-800 text-white border-none" : null}`}
+    >
       <div className="grid gap-2">
         <Label htmlFor="name">Name</Label>
         <Input
@@ -190,8 +225,11 @@ function ProfileForm({
       <div className="grid gap-2">
         <Label htmlFor="category">Rewards</Label>
         <Select onValueChange={handleLeadRewards} value={leadRewards}>
-          <SelectTrigger className="">
-            <SelectValue placeholder="Select Reward Status" />
+          <SelectTrigger className="text-black">
+            <SelectValue
+              className="placeholder:text-red-500"
+              placeholder="Select Reward Status"
+            />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -225,14 +263,14 @@ function ProfileForm({
           <Label htmlFor="r3">Home Security</Label>
         </div>
       </RadioGroup>
-      <div className="grid gap-2">
-        <Label htmlFor="Date of Follow Up">Date Of Follow Up</Label>
+      <div className="grid gap-3">
+        <Label htmlFor="Date of Follow Up">Date Of Follow Up Reminder</Label>
         <Popover>
           <PopoverTrigger asChild>
             <Button
               variant={"outline"}
               className={cn(
-                "w-[280px] justify-start text-left font-normal",
+                "w-[280px] justify-start text-left text-black font-normal",
                 !followUp && "text-muted-foreground"
               )}
             >
@@ -252,7 +290,6 @@ function ProfileForm({
       </div>
 
       <Slider
-        // defaultValue={[50]}
         max={100}
         step={1}
         className={cn("w-[95%]", className)}
@@ -262,19 +299,7 @@ function ProfileForm({
       <div className="w-full flex text-center justify-center font-bold text-lg">
         {interestLevel}
       </div>
-      <Button
-        className="bg-violet-600"
-        onClick={() =>
-          handleSetNewLead(
-            leadName,
-            leadCategory,
-            leadRewards,
-            leadNumber,
-            followUp,
-            interestLevel
-          )
-        }
-      >
+      <Button className="bg-violet-600" onClick={() => leadValidation()}>
         Save changes
       </Button>
     </div>

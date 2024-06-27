@@ -54,7 +54,6 @@ a{
     padding: 1.5rem 1rem ;
     margin-left: 1rem;
     font-weight: 400;
-    color: rgb(19, 19, 19);
     border-radius: 20px 0 0 5px;
     cursor: pointer;
 }
@@ -82,8 +81,6 @@ a{
 
 .date-container{
     display: flex;
-    justify-content: right;
-    width: 100%;
     margin-top: 1rem;
     margin-right: 2rem;
 }

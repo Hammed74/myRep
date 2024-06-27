@@ -2,15 +2,25 @@
 import "../stylesheets/Landing.css"
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Footer from "./components/Footer";
 
-function Landing({setName}) {
+function Landing({name, setName}) {
 
 const [forgot, setForgot] = useState(false)
+
+const [error, setError] = useState(false);
 
 const handleChange = (e) => {
   setName(e.target.value);
 };
 
+const handleLink = (event) => {
+if(!name){
+event.preventDefault();
+setError(true)
+
+}
+}
   return (
     <>
       <div className="body-landing">
@@ -24,16 +34,34 @@ const handleChange = (e) => {
               <h2 className="sign-in">Sign In</h2>
               <div className="log-box">
                 <div className="login-label">Username</div>
-                <input onChange={handleChange} className="login-box username" type="text" />
+                <input
+                  value={name}
+                  onChange={handleChange}
+                  className="login-box username placeholder-red-600"
+                  type="text"
+                />
+                {error ? (
+                  <div className="text-red-600 font-bold text-sm relative">
+                    Enter a Username
+                  </div>
+                ) : null}
               </div>
               <div className="log-box">
                 <div className="login-label">Password</div>
-                <input className="login-box password" type="password" />
+                <input
+                  defaultValue="Comcast1234$"
+                  className="login-box password"
+                  type="password"
+                />
               </div>
               <div className="forgot" onClick={() => setForgot(true)}>
                 Forgot Password?
               </div>
-              <Link style={{ height: "3rem", margin: "auto 0" }} to={"/home"}>
+              <Link
+                onClick={handleLink}
+                style={{ height: "3rem", margin: "auto 0" }}
+                to={"/home"}
+              >
                 <button className="submit">Continue</button>
               </Link>
             </>
@@ -41,6 +69,7 @@ const handleChange = (e) => {
             <ForgotPassword setForgot={setForgot} />
           )}
         </div>
+        <Footer />
       </div>
     </>
   );

@@ -14,18 +14,18 @@ const badgeVariants = cva(
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
-        Diamond: "bg-blue-300 text-foreground ",
-        Platinum: "bg-gray-200",
-        Gold: "bg-amber-400",
-        Silver: "bg-zinc-400"
+        outline: "text-black",
+        Diamond: "bg-blue-300 text-black border-none",
+        Platinum: "bg-gray-200 text-black border-none",
+        Gold: "bg-amber-400 text-black border-none ",
+        Silver: "bg-zinc-400 text-black border-none",
       },
     },
     defaultVariants: {
       variant: "default",
     },
   }
-)
+);
 
 function Badge({
   className,

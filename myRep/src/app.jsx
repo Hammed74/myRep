@@ -1,10 +1,11 @@
 import Landing from "./views/Landing";
 import { Route, Routes } from "react-router-dom";
-import Home from "./views/Leads";
+import { Home } from "./views/Home";
 import { useState } from "react";
 
+
 export default function App() {
-  const [name, setName] = useState();
+  const [name, setName] = useState("Xfinity Rep");
 
   return (
     <Routes>
