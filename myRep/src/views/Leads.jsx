@@ -9,6 +9,7 @@ import { DrawerDialogDemo } from './components/DrawerDialog';
 import { useEffect } from 'react';
 import { Switch } from '../../components/ui/switch';
 import { Label } from '@radix-ui/react-dropdown-menu';
+import { v4 as uuidv4 } from "uuid";
 
 import {
   Select,
@@ -221,12 +222,14 @@ export function Leads({
   return (
     <>
       <div
-        className={`home-main ml-20p ${dark ? "bg-zinc-900 text-white" : null}`}
+        className={`home-main ml-20p min-h-screen ${dark ? "bg-zinc-900 text-white" : null}`}
       >
         <div className="date-container flex justify-between w-[90%] ml-32 ">
           <div className="flex items-center space-x-2">
             <Switch onCheckedChange={handleToggle} id="airplane-mode" />
-            <Label htmlFor="airplane-mode">Activate {dark ? "Light" : "Dark"} Mode</Label>
+            <Label htmlFor="airplane-mode">
+              Activate {dark ? "Light" : "Dark"} Mode
+            </Label>
           </div>
           <div>
             <div className="text-1.7xl text-right ml-4 ">{dateFormatted}</div>
@@ -292,6 +295,7 @@ export function Leads({
           />
         </div>
         <Cards
+          mainArray={leadArray}
           leadArray={!tempSort ? pastWeekLeads : leadArray}
           setLeadArray={setLeadArray}
           newLead={newLead}
@@ -303,6 +307,7 @@ export function Leads({
         {!tempSort ? (
           <>
             <Cards
+              mainArray={leadArray}
               leadArray={pastMonthLeads}
               setLeadArray={setLeadArray}
               newLead={newLead}
@@ -312,6 +317,7 @@ export function Leads({
               dark={dark}
             />
             <Cards
+              mainArray={leadArray}
               leadArray={pastYearLeads}
               setLeadArray={setLeadArray}
               newLead={newLead}
@@ -373,7 +379,7 @@ function calculateTemp(date, rewards, interest){
  export function Lead(name, rewards, phone, temp, category, date, followUp, interestLevel, notes) {
 
   calculateTemp(date)
-
+   this.id = uuidv4()
    this.name = name;
    this.rewards = rewards;
    this.phone = phone;

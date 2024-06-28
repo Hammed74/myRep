@@ -34,7 +34,7 @@ import { compareDesc } from "date-fns";
 
 import Person from "../../assets/person.png";
 
-export default function Cards({date, time, newLead, leadArray, setLeadArray, search, dark}) {
+export default function Cards({date, time, newLead, leadArray, setLeadArray, search, dark, mainArray}) {
 
 
 
@@ -95,13 +95,17 @@ export default function Cards({date, time, newLead, leadArray, setLeadArray, sea
                 )
                   return (
                     <LeadCard
-                      key={uuidv4()}
+                      key={lead.id}
+                      id={lead.id}
                       name={lead.name}
                       rewards={lead.rewards}
                       phone={lead.phone}
                       temp={lead.temp}
                       category={lead.category}
                       dark={dark}
+                      leadArray={leadArray}
+                      setLeadArray={setLeadArray}
+                      mainArray={mainArray}
                     />
                   );
               })}
@@ -118,7 +122,7 @@ export default function Cards({date, time, newLead, leadArray, setLeadArray, sea
 
 
 
-function LeadCard({ name, rewards, phone, temp, category, dark }) {
+function LeadCard({ name, rewards, phone, temp, category, id, dark, leadArray, setLeadArray, mainArray }) {
 
   function displayNumber(phone) {
     const phoneArray = phone.split("");
@@ -135,6 +139,10 @@ function LeadCard({ name, rewards, phone, temp, category, dark }) {
     return phoneOutput;
   }
 
+  function handleDelete(key){
+    const newArray = mainArray.filter((lead) => lead.id !== key);
+    setLeadArray(newArray)
+  }
   return (
     <TableRow>
       <TableCell className="hidden sm:table-cell">
@@ -169,8 +177,7 @@ function LeadCard({ name, rewards, phone, temp, category, dark }) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleDelete(id)} >Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </TableCell>
