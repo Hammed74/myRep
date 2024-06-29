@@ -288,16 +288,18 @@ function ProfileForm({
           </PopoverContent>
         </Popover>
       </div>
-
-      <Slider
-        max={100}
-        step={1}
-        className={cn("w-[95%]", className)}
-        value={interestLevel}
-        onValueChange={(newValue) => handleInterestChange(newValue)}
-      />
-      <div className="w-full flex text-center justify-center font-bold text-lg">
-        {interestLevel}
+      <div className="grid gap-3">
+        <Label htmlFor="Interest Level">Interest Level</Label>
+        <Slider
+          max={100}
+          step={1}
+          className={cn("w-[95%]", className)}
+          value={interestLevel}
+          onValueChange={(newValue) => handleInterestChange(newValue)}
+        />
+        <div className="w-full flex text-center justify-center font-bold text-lg">
+          {interestLevel}
+        </div>
       </div>
       <Button className="bg-violet-600" onClick={() => leadValidation()}>
         Save changes
