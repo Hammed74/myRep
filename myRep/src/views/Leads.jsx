@@ -224,7 +224,7 @@ export function Leads({
       <div
         className={`home-main ml-20p min-h-screen ${dark ? "bg-zinc-900 text-white" : null}`}
       >
-        <div className="date-container flex justify-between w-[90%] ml-32 ">
+        <div className="date-container flex w-full justify-between pl-32 pr-4  ">
           <div className="flex items-center space-x-2">
             <Switch onCheckedChange={handleToggle} id="airplane-mode" />
             <Label htmlFor="airplane-mode">
@@ -368,8 +368,6 @@ function calculateTemp(date, rewards, interest){
     }
 
     const interestValue = interest * 1.1;
-    console.log(interestValue)
-    console.log(daysElapsed)
 
     const score = ((daysElapsed + rewardsValue + interestValue) / 3)
 
