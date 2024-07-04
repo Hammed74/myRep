@@ -11,6 +11,7 @@ import { Switch } from '../../components/ui/switch';
 import { Label } from '@radix-ui/react-dropdown-menu';
 import { v4 as uuidv4 } from "uuid";
 
+
 import {
   Select,
   SelectContent,
@@ -191,11 +192,14 @@ export function Leads({
 
   const sevenDaysAgo = new Date(currentDate);
   sevenDaysAgo.setDate(currentDate.getDate() - 7);
+  const sevenDaysAgoFormatted = format(sevenDaysAgo, "LLLL do" )
 
   const pastWeekLeads = leadArray.filter((lead) => lead.date > sevenDaysAgo);
 
   const aMonthAgo = new Date(currentDate);
   aMonthAgo.setDate(currentDate.getDate() - 31);
+
+  const aMonthAgoFormatted = format(aMonthAgo, "LLLL do");
 
   const pastMonthLeads = leadArray.filter(
     (lead) => lead.date >= aMonthAgo && lead.date <= sevenDaysAgo
@@ -205,6 +209,7 @@ export function Leads({
   aYearAgo.setDate(currentDate.getDate() - 31);
 
   const pastYearLeads = leadArray.filter((lead) => lead.date <= aYearAgo);
+
 
   const dateNow = new Date();
 
@@ -299,7 +304,7 @@ export function Leads({
           leadArray={!tempSort ? pastWeekLeads : leadArray}
           setLeadArray={setLeadArray}
           newLead={newLead}
-          date={!tempSort ? "June 10th - Now" : null}
+          date={!tempSort ? sevenDaysAgoFormatted + " - Now" : null}
           time={!tempSort ? "Past Week" : "Leads"}
           search={search}
           dark={dark}
@@ -311,7 +316,7 @@ export function Leads({
               leadArray={pastMonthLeads}
               setLeadArray={setLeadArray}
               newLead={newLead}
-              date={"May 17th - Now"}
+              date={aMonthAgoFormatted + " - " + sevenDaysAgoFormatted}
               time={"Past Month"}
               search={search}
               dark={dark}

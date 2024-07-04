@@ -95,7 +95,7 @@ export default function Cards({date, time, newLead, leadArray, setLeadArray, sea
                 )
                   return (
                     <LeadCard
-                      key={lead.id}
+                    key={lead.id}
                       id={lead.id}
                       name={lead.name}
                       rewards={lead.rewards}
